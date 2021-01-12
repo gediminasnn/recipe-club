@@ -24,24 +24,21 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if($form->get('plainPassword')->getData() === $form->get('repeatPassword')->getData())
-            {
-                // encode the plain password
-                $user->setPassword(
-                    $passwordEncoder->encodePassword(
-                        $user,
-                        $form->get('plainPassword')->getData()
-                    )
-                );
-                $user->setRoles(array('ROLE_USER'));
+            $form = $form->getData();
+            // encode the plain password
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user, $user->getPassword()
+                )
+            );
+            $user->setRoles(array('ROLE_USER'));
 
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($user);
-                $entityManager->flush();
-                // do anything else you need here, like send an email
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            // do anything else you need here, like send an email
 
-                return $this->redirectToRoute('home');
-            }
+            return $this->redirectToRoute('home');
         }
 
 
