@@ -61,18 +61,6 @@ If you get an error that the database exists, that should
 be ok. But if you have problems, completely drop the
 database (`doctrine:database:drop --force`) and try again.
 
-**Compiling Webpack Encore Assets**
-
-This project uses Webpack Encore.
-
-Make sure to install [Node](https://nodejs.org/en/download/) and also [yarn](https://yarnpkg.com).
-Then run:
-
-```
-yarn install
-yarn encore dev --watch
-```
-
 **Start the built-in web server**
 
 You can use Nginx or Apache, but Symfony's local web server
