@@ -49,10 +49,6 @@ class Recipe
      */
     private $photo;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Ingredients::class, inversedBy="recipes")
-     */
-    private $ingredients;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -67,7 +63,6 @@ class Recipe
 
     public function __construct()
     {
-        $this->ingredients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,29 +142,6 @@ class Recipe
         return $this;
     }
 
-    /**
-     * @return Collection|Ingredients[]
-     */
-    public function getIngredients(): Collection
-    {
-        return $this->ingredients;
-    }
-
-    public function addIngredient(Ingredients $ingredient): self
-    {
-        if (!$this->ingredients->contains($ingredient)) {
-            $this->ingredients[] = $ingredient;
-        }
-
-        return $this;
-    }
-
-    public function removeIngredient(Ingredients $ingredient): self
-    {
-        $this->ingredients->removeElement($ingredient);
-
-        return $this;
-    }
 
     public function getPublishedAt(): ?\DateTimeInterface
     {
