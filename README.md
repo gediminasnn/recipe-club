@@ -18,10 +18,8 @@ This repository holds the code and script for simple recipe sharing website made
 - [x] Login via username Authentication system
 - [x] Remember me option on login form
 - [x] Registration
-- [ ] Crud on Recipe entity
-- [ ] Crud on Ingredients entity
+- [X] Crud on Recipe entity
 - [ ] Admin dashboard
-- [ ] Homepage with latest approved recipes
 - [ ] Profile dashboard
 - [ ] File upload
 
