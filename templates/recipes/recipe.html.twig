@@ -4,7 +4,7 @@
 
 {% block navbar %}
     <li class="nav-item">
-        <a class="nav-link" id="home-tab" data-toggle="tab" href="{{path('recipes')}}" role="tab" aria-controls="home" aria-selected="true">Home</a>
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="{{path('recipes')}}" role="tab" aria-controls="home" aria-selected="true">Home</a>
     </li>
     {% if app.user %}
         <li class="nav-item">
@@ -12,12 +12,13 @@
         </li>
     {% endif %}
     <li class="nav-item">
-        <a class="nav-link active" id="contact-tab" data-toggle="tab" href="{{path('contacts')}}" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="{{path('contacts')}}" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
     </li>
     {% if app.user %}
         <li class="nav-item">
             <a class="nav-link" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false" href="{{ path('app_logout') }}">Logout</a>
         </li>
+
     {% else %}
         <li class="nav-item">
             <a class="nav-link" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false" href="{{ path('app_login') }}">Login</a>
@@ -29,18 +30,32 @@
 {% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
 
+    {% if app.user %}
+        <a href="{{ path('app_new_recipe') }}"><input class="btn btn-success" type="button" value="Create new recipe"></a>
+    {% endif %}
 
+    {% for recipe in recipes %}
+        <div class="border-top my-3"></div>
 
+        <div class="col-md-10">
+            <h1>{{ recipe.name }}({{ recipe.rating }})</h1>
+
+            <h3>By : {{ recipe.publisher.username }}</h3>
+            Difficulty : <em>{{ recipe.easeOfPrep }}/10</em><br>
+            Published at : {{ recipe.publishedAt }}
+            <article><p>
+                    {{ recipe.notes }}
+                </p></article>
+            <a href="{{ path('recipe', {id: recipe.id}) }}"><input class="btn btn-primary" type="button" value="Read more"></a>
+
+        </div>
+
+    {% endfor %}
     {% if app.user %}
         <div class="mb-3">
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-
 
 {% endblock %}

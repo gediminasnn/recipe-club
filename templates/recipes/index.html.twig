@@ -4,7 +4,7 @@
 
 {% block navbar %}
     <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="{{path('home')}}" role="tab" aria-controls="home" aria-selected="true">Home</a>
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="{{path('recipes')}}" role="tab" aria-controls="home" aria-selected="true">Home</a>
     </li>
     {% if app.user %}
         <li class="nav-item">
@@ -30,7 +30,28 @@
 {% endblock %}
 
 {% block body %}
-Homepage
+
+    {% if app.user %}
+    <a href="{{ path('app_new_recipe') }}"><input class="btn btn-success" type="button" value="Create new recipe"></a>
+    {% endif %}
+
+    {% for recipe in recipes %}
+        <div class="border-top my-3"></div>
+
+        <div class="col-md-10">
+            <h1>{{ recipe.title }}({{ recipe.rating }})</h1>
+
+            <h3>By : {{ recipe.publisher.username }}</h3>
+            Difficulty : <em>{{ recipe.difficulty }}/10</em><br>
+            Published at : {% if recipe.publishedAt %} {{ recipe.publishedAt|date("Y-m-d H:i") }} {% endif %}
+            <article><p>
+                    {{ recipe.notes|u.truncate(50) }}...
+                </p></article>
+            <a href="{{ path('recipe', {id: recipe.id}) }}"><input class="btn btn-primary" type="button" value="Read more"></a>
+
+        </div>
+
+    {% endfor %}
     {% if app.user %}
         <div class="mb-3">
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>

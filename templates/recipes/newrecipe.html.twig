@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RecipesController!{% endblock %}
+{#{% if form is defined %}#}
+{#{% form_theme form 'form/my_theme.html.twig' %}#}
+{#{% endif %}#}
+
+{% block title %}Register!{% endblock %}
 
 {% block navbar %}
     <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="{{path('home')}}" role="tab" aria-controls="home" aria-selected="true">Home</a>
+        <a class="nav-link" id="home-tab" data-toggle="tab" href="{{path('recipes')}}" role="tab" aria-controls="home" aria-selected="true">Home</a>
     </li>
     {% if app.user %}
         <li class="nav-item">
@@ -15,26 +19,23 @@
         <a class="nav-link" id="contact-tab" data-toggle="tab" href="{{path('contacts')}}" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
     </li>
     {% if app.user %}
+
         <li class="nav-item">
             <a class="nav-link" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false" href="{{ path('app_logout') }}">Logout</a>
         </li>
-
     {% else %}
         <li class="nav-item">
             <a class="nav-link" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false" href="{{ path('app_login') }}">Login</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false" href="{{ path('app_register') }}">Register</a>
+            <a class="nav-link active" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false" href="{{ path('app_register') }}">Register</a>
         </li>
+
+
     {% endif %}
 {% endblock %}
 
 {% block body %}
-    Homepage
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
-
+    <h2>New recipe</h2>
+    {{ form(newRecipeForm) }}
 {% endblock %}

@@ -22,32 +22,32 @@ class Recipe
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $name;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $rating;
+    private $title;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $easeOfPrep;
+    private $rating = 0;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer")
+     */
+    private $difficulty;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
      */
     private $notes;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $prepTime;
+    private $prepareTime;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $photo;
+    private $photo = "";
 
 
     /**
@@ -70,14 +70,14 @@ class Recipe
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getTitle(): ?string
     {
-        return $this->name;
+        return $this->title;
     }
 
-    public function setName(string $name): self
+    public function setTitle(string $title): self
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
@@ -94,14 +94,14 @@ class Recipe
         return $this;
     }
 
-    public function getEaseOfPrep(): ?int
+    public function getDifficulty(): ?int
     {
-        return $this->easeOfPrep;
+        return $this->difficulty;
     }
 
-    public function setEaseOfPrep(int $easeOfPrep): self
+    public function setDifficulty(int $difficulty): self
     {
-        $this->easeOfPrep = $easeOfPrep;
+        $this->difficulty = $difficulty;
 
         return $this;
     }
@@ -118,14 +118,14 @@ class Recipe
         return $this;
     }
 
-    public function getPrepTime(): ?int
+    public function getPrepareTime(): ?int
     {
-        return $this->prepTime;
+        return $this->prepareTime;
     }
 
-    public function setPrepTime(int $prepTime): self
+    public function setPrepareTime(int $prepareTime): self
     {
-        $this->prepTime = $prepTime;
+        $this->prepareTime = $prepareTime;
 
         return $this;
     }
